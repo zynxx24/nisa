@@ -8,6 +8,7 @@ Steps:
 4. **CD TO MAIN DIRECTORY**
 5. **RUN IT**
 ```
+npm install
 npm run dev
 
 ```
