@@ -45,6 +45,11 @@ CREATE TABLE admin_codes (
 INSERT INTO admins (email, password) VALUES 
 ('tes@gmail.com', '$2a$10$Qnt7ShvvluT6.aw6hkgAae22I6qiS3zuqXcPd04NU.B2o4jYd0BEq');
 
+-- Menambahkan kode admin baru
+INSERT INTO admin_codes (code) VALUES
+('KODE2025');
+
+
 -- Create indexes for better performance
 CREATE INDEX idx_users_email ON users(email);
 CREATE INDEX idx_users_nip ON users(nip);
