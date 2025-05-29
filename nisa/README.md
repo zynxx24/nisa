@@ -2,7 +2,7 @@
 
 ## How To Use It
 Steps:
-1. **Activate Yours MYSQL use xampp**
+1. **Activate Yours MYSQL use xampp** download here [https://sourceforge.net/projects/xampp/files/XAMPP%20Windows/8.2.12/xampp-windows-x64-8.2.12-0-VS16-installer.exe]
 2. **CREATE DATABASE USING code in mysql.schema**
 3. **DOWNLOAD NODE.JS AND INSTALL** [https://nodejs.org/dist/v24.1.0/node-v24.1.0-x64.msi]
 4. **EXTRACT OR CLONE INTO YOUR COMPUTER AND CD TO MAIN DIRECTORY OF WEBSITE**
