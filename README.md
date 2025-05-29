@@ -1,4 +1,7 @@
 # NISA PROJECT BY GUSWIRA
+## CLIENT
+**Paramitha S6 System Information**
+
 
 ## How To Use It
 Steps:
