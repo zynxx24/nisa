@@ -1,0 +1,69 @@
+-- Create database
+CREATE DATABASE IF NOT EXISTS attendance_db;
+USE attendance_db;
+
+-- Create users table
+CREATE TABLE users (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    username VARCHAR(100) NOT NULL,
+    password VARCHAR(255) NOT NULL,
+    nip VARCHAR(50) NOT NULL UNIQUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create admins table
+CREATE TABLE admins (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    email VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create attendance table
+CREATE TABLE attendance (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    user_id INT NOT NULL,
+    photo_url VARCHAR(500) NOT NULL,
+    description TEXT NOT NULL,
+    status ENUM('Hadir', 'Izin') NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+CREATE TABLE admin_codes (
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(100) UNIQUE NOT NULL,
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert default admin (password: 123456)
+INSERT INTO admins (email, password) VALUES 
+('tes@gmail.com', '$2a$10$Qnt7ShvvluT6.aw6hkgAae22I6qiS3zuqXcPd04NU.B2o4jYd0BEq');
+
+-- Create indexes for better performance
+CREATE INDEX idx_users_email ON users(email);
+CREATE INDEX idx_users_nip ON users(nip);
+CREATE INDEX idx_attendance_user_id ON attendance(user_id);
+CREATE INDEX idx_attendance_created_at ON attendance(created_at);
+CREATE INDEX idx_attendance_status ON attendance(status);
+
+-- Create view for attendance with user details
+CREATE VIEW attendance_with_users AS
+SELECT 
+    a.id,
+    a.user_id,
+    u.username,
+    u.nip,
+    u.email,
+    a.photo_url,
+    a.description,
+    a.status,
+    a.created_at,
+    a.updated_at
+FROM attendance a
+JOIN users u ON a.user_id = u.id;

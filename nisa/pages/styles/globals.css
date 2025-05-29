@@ -1,0 +1,13 @@
+/* styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@media screen and (prefers-color-scheme: dark) {
+  :root {
+    --background-color: #1a202c; /* Dark background */
+    --text-color: #f7fafc; /* Light text */
+    --link-color: #63b3ed; /* Light blue links */
+  }
+     
+}
